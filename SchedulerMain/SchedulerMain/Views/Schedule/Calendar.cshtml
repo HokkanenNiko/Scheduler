@@ -1,0 +1,50 @@
+﻿@model CalendarViewModel
+@{
+    ViewData["Title"] = "Calendar";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/calendar.css" asp-append-version="true">
+    <meta name="viewport" content="width=device-width" />
+    <title>Calendar</title>
+</head>
+<body>
+    <div>
+        <div class="month">
+            <ul>
+                <li class="prev">&#10094;</li>
+                <li class="next">&#10095;</li>
+                <li>@Model?.ActiveMonth.MonthOfYear<br><span style="font-size:18px">@Model?.ActiveYear</span></li>
+            </ul>
+        </div>
+
+        <ul class="weekdays">
+            <li>Mo</li>
+            <li>Tu</li>
+            <li>We</li>
+            <li>Th</li>
+            <li>Fr</li>
+            <li>Sa</li>
+            <li>Su</li>
+        </ul>
+
+        <ul class="days">
+            @{
+                for (int i = 0; i < Model.ActiveMonth.SkippedDays; i++)
+                {
+                   <li></li> 
+                }
+                foreach (var day in Model.ActiveMonth.Days)
+                {
+                    @:<li>
+                    @day.DayIndexInMonth;
+                    @:</li>
+                }
+            }
+        </ul>
+    </div>
+</body>
+</html>
